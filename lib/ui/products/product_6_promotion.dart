@@ -1,0 +1,168 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:dealbuddy/models/vendorsModel.dart';
+import 'package:dealbuddy/variables.dart';
+
+// Author: VC Fetter
+
+class ProductPromoPromoPage extends StatefulWidget {
+  final String promoName;
+  final String promoDescription;
+  final String promoImage;
+  final String promoVendor;
+  final String promoProduct;
+  final String productGroup;
+  final String productSubGroup;
+  final String productSubSubGroup;
+
+  const ProductPromoPromoPage(
+      {Key key,
+        this.promoName,
+        this.promoDescription,
+        this.promoImage,
+        this.promoVendor,
+        this.promoProduct,
+        this.productGroup,
+        this.productSubGroup,
+        this.productSubSubGroup})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return ProductPromoPromoPageState();
+  }
+}
+
+class ProductPromoPromoPageState extends State<ProductPromoPromoPage> {
+
+  Widget vendorListViewWidget(Vendors vendors, String vendorName) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: new ListView.builder(
+          itemCount: vendors.count,
+          padding: const EdgeInsets.all(2.0),
+          itemBuilder: (context, position) {
+            if (vendorName != vendors.result[position].vendorName)
+              return Container();
+            return Card(
+              child: ListTile(
+                title: Text(
+                  '${vendors.result[position].vendorName}',
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+          }),
+    );
+  }
+
+  Widget promoInformationWidget() {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              widget.promoName,
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          Divider(),
+          Text(
+            widget.promoDescription,
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Divider(),
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                '1 x ${widget.promoProduct}',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ),
+          Divider(),
+          InkWell(
+            child: Text(
+              'Available at ${widget.promoVendor}',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
+          Divider(),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: DefaultTabController(
+        length: 1,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                backgroundColor: Color(0xff800000),
+                expandedHeight: 200.0,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                    titlePadding: EdgeInsets.all(15.0),
+                    centerTitle: true,
+                    title: Text(widget.promoName,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16.0,
+                        )),
+                    background: Image.network(
+                      '${backendAddress}static/uploads/${widget.promoImage.replaceAll('.jpg', ' ').trim()}.jpg',
+                      fit: BoxFit.cover,
+                    )),
+              ),
+              new SliverPadding(
+                padding: new EdgeInsets.all(16.0),
+                sliver: new SliverList(
+                  delegate: new SliverChildListDelegate([
+                    TabBar(
+                        labelColor: Colors.black87,
+                        unselectedLabelColor: Colors.grey,
+                        tabs: [
+                          new Tab(
+                              icon: new Icon(Icons.info),
+                              text: "Promotion Information"),
+                        ]),
+                  ]),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: <Widget>[
+              promoInformationWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

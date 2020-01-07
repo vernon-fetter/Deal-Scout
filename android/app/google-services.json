@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "976274410989",
+    "firebase_url": "https://dealbuddy-b8597.firebaseio.com",
+    "project_id": "dealbuddy-b8597",
+    "storage_bucket": "dealbuddy-b8597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976274410989:android:ad7c9bce8c822984dc2be4",
+        "android_client_info": {
+          "package_name": "io.cyberflex.dealbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976274410989-1hassd93t8g7dj6bbs1u9qk4cd085nad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0TQH4_X1R0HiwNhtm_jeTVyP0NXpuCe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976274410989-1hassd93t8g7dj6bbs1u9qk4cd085nad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
